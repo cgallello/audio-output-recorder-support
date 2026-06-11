@@ -3,68 +3,150 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AudioOut Recorder Support</title>
+<title>AudioOut Recorder — Record your Mac's audio</title>
+<meta name="description" content="AudioOut Recorder records the audio playing on your Mac and saves it to your Desktop as a clean .m4a file. No microphone, no screen recording.">
 <style>
   :root{
-    --ink:#15131A; --paper:#FFFCF2; --sun:#FFCB05; --cobalt:#2A5BFF; --tomato:#FF4438;
+    --ink:#15131A; --paper:#FFFCF2; --sun:#FFCB05; --sunh:#FFE14D;
+    --cobalt:#2A5BFF; --tomato:#FF4438; --stroke:2.5px;
   }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);
-    font-family:-apple-system,"SF Pro Rounded","SF Pro Text",system-ui,sans-serif;
-    line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px}
-  header{display:flex;align-items:center;gap:16px;margin-bottom:8px}
-  .chip{width:54px;height:54px;border:2.5px solid var(--ink);border-radius:14px;
-    background:var(--sun);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;font-size:26px}
-  h1{font-size:34px;margin:0;font-weight:800;letter-spacing:-0.5px}
-  h2{font-size:21px;margin:36px 0 8px;font-weight:800}
-  p{margin:10px 0}
-  a{color:var(--cobalt);font-weight:700;text-decoration:none}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);
+    font-family:'SF Pro Rounded','SF Pro Display',-apple-system,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:var(--cobalt);text-decoration:none;font-weight:700}
   a:hover{text-decoration:underline}
-  .card{border:2.5px solid var(--ink);border-radius:16px;background:#fff;
-    box-shadow:5px 5px 0 var(--ink);padding:20px 22px;margin-top:18px}
-  .muted{color:#6b6770;font-size:14px;margin-top:48px}
-  ul{margin:10px 0;padding-left:20px}
-  li{margin:6px 0}
-  .mail{display:inline-block;border:2.5px solid var(--ink);background:var(--cobalt);color:#fff;
-    border-radius:12px;padding:10px 18px;font-weight:800;box-shadow:4px 4px 0 var(--ink);margin-top:6px}
-  .mail:hover{text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .brick{border:var(--stroke) solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);background:#fff}
+
+  /* nav */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;max-width:1100px;margin:0 auto}
+  nav .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}
+  nav .brand img{width:38px;height:38px;border-radius:9px;border:2px solid var(--ink)}
+  nav .links a{margin-left:20px;color:var(--ink)}
+
+  /* hero */
+  .hero{text-align:center;padding:48px 0 36px}
+  .hero .icon{width:130px;height:130px;border-radius:28px;border:var(--stroke) solid var(--ink);
+    box-shadow:8px 8px 0 var(--ink);margin:0 auto 26px;display:block}
+  .hero h1{font-size:clamp(40px,7vw,76px);font-weight:800;letter-spacing:-2px;line-height:1.02}
+  .hero p.tag{font-size:clamp(18px,2.4vw,24px);color:rgba(21,19,26,.62);font-weight:600;
+    max-width:620px;margin:18px auto 0}
+  .cta{display:inline-flex;align-items:center;gap:12px;margin-top:30px;
+    background:var(--cobalt);color:#fff;border:var(--stroke) solid var(--ink);border-radius:14px;
+    box-shadow:5px 5px 0 var(--ink);padding:15px 26px;font-weight:800;font-size:18px}
+  .cta:hover{text-decoration:none;transform:translate(-1px,-1px);box-shadow:6px 6px 0 var(--ink)}
+  .cta .price{background:var(--sun);color:var(--ink);border:2px solid var(--ink);border-radius:8px;
+    padding:2px 10px;font-size:15px}
+  .soon{display:block;margin-top:12px;font-size:14px;color:rgba(21,19,26,.5);font-weight:600}
+
+  /* screenshots */
+  .shots{padding:30px 0 10px}
+  .shots .row{display:flex;gap:22px;overflow-x:auto;padding:10px 24px 28px;scroll-snap-type:x mandatory}
+  .shots .row::-webkit-scrollbar{height:10px}
+  .shots .row::-webkit-scrollbar-thumb{background:var(--ink);border-radius:6px}
+  .shot{flex:0 0 auto;width:min(560px,82vw);scroll-snap-align:center}
+  .shot img{width:100%;display:block;border-radius:16px;border:var(--stroke) solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+
+  /* section heading */
+  .sec{padding:54px 0 8px}
+  .sec h2{font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-1px;text-align:center}
+  .sec .lead{text-align:center;color:rgba(21,19,26,.6);font-weight:600;max-width:560px;margin:14px auto 0}
+
+  /* features */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;margin-top:34px}
+  .card{padding:24px}
+  .card .chip{width:42px;height:42px;border-radius:11px;border:2px solid var(--ink);display:grid;
+    place-items:center;font-size:22px;margin-bottom:14px}
+  .card h3{font-size:19px;font-weight:800;margin-bottom:6px}
+  .card p{color:rgba(21,19,26,.66);font-weight:500}
+
+  /* quality */
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:32px}
+  .tier{padding:22px;text-align:center}
+  .tier .name{display:inline-block;font-weight:800;font-size:15px;border:2px solid var(--ink);
+    border-radius:8px;padding:5px 16px;margin-bottom:12px}
+  .tier h3{font-size:24px;font-weight:800}
+  .tier p{color:rgba(21,19,26,.62);font-weight:600;margin-top:4px}
+
+  /* privacy band */
+  .band{margin:60px 0 0;background:var(--sunh);border-top:var(--stroke) solid var(--ink);
+    border-bottom:var(--stroke) solid var(--ink);padding:48px 0;text-align:center}
+  .band h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-1px}
+  .band p{max-width:560px;margin:14px auto 0;font-weight:600}
+
+  footer{padding:40px 0 60px;text-align:center;color:rgba(21,19,26,.55);font-weight:600;font-size:14px}
+  footer a{color:var(--ink)}
+  footer .row{margin-bottom:12px}
+  footer .row a{margin:0 10px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="chip">🎙️</div>
-    <h1>AudioOut Recorder</h1>
+
+  <nav>
+    <div class="brand"><img src="icon.png" alt="AudioOut Recorder icon"> AudioOut Recorder</div>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="support.html">Support</a>
+    </div>
+  </nav>
+
+  <header class="hero wrap">
+    <img class="icon" src="icon.png" alt="AudioOut Recorder app icon">
+    <h1>Record your Mac's audio.</h1>
+    <p class="tag">AudioOut Recorder captures the sound your Mac is playing and saves it to your Desktop as a clean .m4a file. No microphone, no screen recording.</p>
+    <a class="cta" href="https://apps.apple.com/app/id6779082848">Get it on the Mac App Store <span class="price">$0.99</span></a>
+    <span class="soon">A one-time purchase. macOS 13 or later.</span>
   </header>
-  <p>Record the sound your Mac is playing and save it to your Desktop as an <strong>.m4a</strong> file. No microphone, no screen content, no extra drivers.</p>
 
-  <div class="card">
-    <h2 style="margin-top:0">Need help?</h2>
-    <p>Email me and I'll get back to you.</p>
-    <a class="mail" href="mailto:chrisgallello@gmail.com?subject=AudioOut%20Recorder%20Support">chrisgallello@gmail.com</a>
-  </div>
+  <section class="shots">
+    <div class="row">
+      <div class="shot"><img src="screenshots/0_hero.png" alt="Record your Mac's audio"></div>
+      <div class="shot"><img src="screenshots/1_desktop.png" alt="Saved straight to your Desktop"></div>
+      <div class="shot"><img src="screenshots/2_quality.png" alt="Good, Better, or lossless Best"></div>
+      <div class="shot"><img src="screenshots/3_recording.png" alt="Watch it record, live"></div>
+      <div class="shot"><img src="screenshots/4_privacy.png" alt="No mic, no screen, just sound"></div>
+    </div>
+  </section>
 
-  <h2>How it works</h2>
-  <ul>
-    <li>Click <strong>Start Recording</strong>. The first time, macOS asks for Screen Recording permission. That is what lets the app read the system audio stream. No video or screen content is ever captured.</li>
-    <li>Play anything: music, a call, a video, a game.</li>
-    <li>Click <strong>Stop &amp; Save</strong>. The file is saved to your Desktop, named by date, and revealed in Finder.</li>
-  </ul>
+  <section class="sec wrap" id="features">
+    <h2>One job, done well.</h2>
+    <p class="lead">Press Start, play anything, press Stop &amp; Save. The file lands on your Desktop and opens in Finder.</p>
+    <div class="grid">
+      <div class="card brick"><div class="chip" style="background:var(--cobalt)">🎧</div><h3>System audio, not your mic</h3><p>It records exactly what your speakers are playing. The microphone is never touched.</p></div>
+      <div class="card brick"><div class="chip" style="background:var(--sun)">🗂️</div><h3>Straight to your Desktop</h3><p>Every recording saves as an .m4a, named by the date, and is revealed in Finder.</p></div>
+      <div class="card brick"><div class="chip" style="background:var(--tomato)">📊</div><h3>Live level meter</h3><p>A stepped meter and a running timer show you it's working while you record.</p></div>
+      <div class="card brick"><div class="chip" style="background:var(--sun)">🎚️</div><h3>Three quality presets</h3><p>Good, Better, or lossless Best. Pick small files or a perfect copy.</p></div>
+      <div class="card brick"><div class="chip" style="background:var(--cobalt)">🔒</div><h3>No data collected</h3><p>No accounts, no analytics, no network. Nothing ever leaves your Mac.</p></div>
+      <div class="card brick"><div class="chip" style="background:var(--tomato)">🪟</div><h3>One simple window</h3><p>A single, bold window that does the one thing you opened it for.</p></div>
+    </div>
+  </section>
 
-  <h2>Quality settings</h2>
-  <ul>
-    <li><strong>Good</strong>: AAC 128 kbps, small files</li>
-    <li><strong>Better</strong>: AAC 256 kbps (default)</li>
-    <li><strong>Best</strong>: Apple Lossless, for an exact copy. Files are about 8 times larger.</li>
-  </ul>
+  <section class="sec wrap">
+    <h2>Choose your quality.</h2>
+    <div class="tiers">
+      <div class="tier brick"><span class="name">Good</span><h3>AAC 128 kbps</h3><p>Small files for quick clips.</p></div>
+      <div class="tier brick"><span class="name" style="background:var(--cobalt);color:#fff;border-color:var(--ink)">Better</span><h3>AAC 256 kbps</h3><p>The default. Crisp and compact.</p></div>
+      <div class="tier brick"><span class="name">Best</span><h3>Apple Lossless</h3><p>An exact copy, for when it matters.</p></div>
+    </div>
+  </section>
 
-  <h2>Frequently asked</h2>
-  <p><strong>Does it record my microphone?</strong><br>No. It only captures system audio output. The app does not use the microphone at all.</p>
-  <p><strong>Why does it need Screen Recording permission?</strong><br>On macOS the system audio stream is provided through the same API as screen recording. The app uses it only for audio. It never records video or screen content.</p>
-  <p><strong>Where do my files go?</strong><br>Straight to your Desktop as <code>.m4a</code> files. Nothing is uploaded anywhere.</p>
+  <section class="band">
+    <div class="wrap">
+      <h2>No mic. No screen. Just sound.</h2>
+      <p>AudioOut Recorder uses the macOS Screen Recording permission only to reach the system audio stream. It never records video or screen content, and it collects no data.</p>
+    </div>
+  </section>
 
-  <p class="muted">© 2026 Christopher Gallello · <a href="privacy.html">Privacy Policy</a></p>
-</div>
+  <footer>
+    <div class="row">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="mailto:chrisgallello@gmail.com?subject=AudioOut%20Recorder">Email</a>
+    </div>
+    © 2026 Christopher Gallello
+  </footer>
+
 </body>
 </html>

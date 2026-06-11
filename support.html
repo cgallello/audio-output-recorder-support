@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AudioOut Recorder Support</title>
+<style>
+  :root{
+    --ink:#15131A; --paper:#FFFCF2; --sun:#FFCB05; --cobalt:#2A5BFF; --tomato:#FF4438;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,"SF Pro Rounded","SF Pro Text",system-ui,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:680px;margin:0 auto;padding:40px 24px 80px}
+  header{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .chip{width:54px;height:54px;border:2.5px solid var(--ink);border-radius:14px;
+    background:var(--sun);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;font-size:26px}
+  h1{font-size:34px;margin:0;font-weight:800;letter-spacing:-0.5px}
+  h2{font-size:21px;margin:36px 0 8px;font-weight:800}
+  p{margin:10px 0}
+  a{color:var(--cobalt);font-weight:700;text-decoration:none}
+  a:hover{text-decoration:underline}
+  .card{border:2.5px solid var(--ink);border-radius:16px;background:#fff;
+    box-shadow:5px 5px 0 var(--ink);padding:20px 22px;margin-top:18px}
+  .muted{color:#6b6770;font-size:14px;margin-top:48px}
+  ul{margin:10px 0;padding-left:20px}
+  li{margin:6px 0}
+  .mail{display:inline-block;border:2.5px solid var(--ink);background:var(--cobalt);color:#fff;
+    border-radius:12px;padding:10px 18px;font-weight:800;box-shadow:4px 4px 0 var(--ink);margin-top:6px}
+  .mail:hover{text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="chip">🎙️</div>
+    <h1>AudioOut Recorder</h1>
+  </header>
+  <p>Record the sound your Mac is playing and save it to your Desktop as an <strong>.m4a</strong> file. No microphone, no screen content, no extra drivers.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0">Need help?</h2>
+    <p>Email me and I'll get back to you.</p>
+    <a class="mail" href="mailto:chrisgallello@gmail.com?subject=AudioOut%20Recorder%20Support">chrisgallello@gmail.com</a>
+  </div>
+
+  <h2>How it works</h2>
+  <ul>
+    <li>Click <strong>Start Recording</strong>. The first time, macOS asks for Screen Recording permission. That is what lets the app read the system audio stream. No video or screen content is ever captured.</li>
+    <li>Play anything: music, a call, a video, a game.</li>
+    <li>Click <strong>Stop &amp; Save</strong>. The file is saved to your Desktop, named by date, and revealed in Finder.</li>
+  </ul>
+
+  <h2>Quality settings</h2>
+  <ul>
+    <li><strong>Good</strong>: AAC 128 kbps, small files</li>
+    <li><strong>Better</strong>: AAC 256 kbps (default)</li>
+    <li><strong>Best</strong>: Apple Lossless, for an exact copy. Files are about 8 times larger.</li>
+  </ul>
+
+  <h2>Frequently asked</h2>
+  <p><strong>Does it record my microphone?</strong><br>No. It only captures system audio output. The app does not use the microphone at all.</p>
+  <p><strong>Why does it need Screen Recording permission?</strong><br>On macOS the system audio stream is provided through the same API as screen recording. The app uses it only for audio. It never records video or screen content.</p>
+  <p><strong>Where do my files go?</strong><br>Straight to your Desktop as <code>.m4a</code> files. Nothing is uploaded anywhere.</p>
+
+  <p class="muted"><a href="./">Home</a> · <a href="privacy.html">Privacy Policy</a> · © 2026 Christopher Gallello</p>
+</div>
+</body>
+</html>
