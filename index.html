@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AudioOut Recorder — Support</title>
+<title>AudioOut Recorder Support</title>
 <style>
   :root{
     --ink:#15131A; --paper:#FFFCF2; --sun:#FFCB05; --cobalt:#2A5BFF; --tomato:#FF4438;
@@ -37,7 +37,7 @@
     <div class="chip">🎙️</div>
     <h1>AudioOut Recorder</h1>
   </header>
-  <p>Record the sound your Mac is playing — straight to a clean <strong>.m4a</strong> file on your Desktop. No microphone, no screen content, no extra drivers.</p>
+  <p>Record the sound your Mac is playing and save it to your Desktop as an <strong>.m4a</strong> file. No microphone, no screen content, no extra drivers.</p>
 
   <div class="card">
     <h2 style="margin-top:0">Need help?</h2>
@@ -47,21 +47,21 @@
 
   <h2>How it works</h2>
   <ul>
-    <li>Click <strong>Start Recording</strong>. The first time, macOS asks for Screen Recording permission — this is what lets the app read the system audio stream. No video or screen content is ever captured.</li>
-    <li>Play anything — music, a call, a video, a game.</li>
+    <li>Click <strong>Start Recording</strong>. The first time, macOS asks for Screen Recording permission. That is what lets the app read the system audio stream. No video or screen content is ever captured.</li>
+    <li>Play anything: music, a call, a video, a game.</li>
     <li>Click <strong>Stop &amp; Save</strong>. The file is saved to your Desktop, named by date, and revealed in Finder.</li>
   </ul>
 
   <h2>Quality settings</h2>
   <ul>
-    <li><strong>Good</strong> — AAC 128 kbps, small files</li>
-    <li><strong>Better</strong> — AAC 256 kbps (default)</li>
-    <li><strong>Best</strong> — Apple Lossless (ALAC); files are roughly 8× larger</li>
+    <li><strong>Good</strong>: AAC 128 kbps, small files</li>
+    <li><strong>Better</strong>: AAC 256 kbps (default)</li>
+    <li><strong>Best</strong>: Apple Lossless, for an exact copy. Files are about 8 times larger.</li>
   </ul>
 
   <h2>Frequently asked</h2>
   <p><strong>Does it record my microphone?</strong><br>No. It only captures system audio output. The app does not use the microphone at all.</p>
-  <p><strong>Why does it need Screen Recording permission?</strong><br>On macOS, the system-audio stream is provided through the same ScreenCaptureKit API as screen recording. The app uses it solely for audio — it never records video or screen content.</p>
+  <p><strong>Why does it need Screen Recording permission?</strong><br>On macOS the system audio stream is provided through the same API as screen recording. The app uses it only for audio. It never records video or screen content.</p>
   <p><strong>Where do my files go?</strong><br>Straight to your Desktop as <code>.m4a</code> files. Nothing is uploaded anywhere.</p>
 
   <p class="muted">© 2026 Christopher Gallello · <a href="privacy.html">Privacy Policy</a></p>
