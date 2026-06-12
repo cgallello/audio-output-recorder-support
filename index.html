@@ -42,10 +42,7 @@
 
   /* screenshots */
   .shots{padding:30px 0 10px}
-  .shots .row{display:flex;gap:22px;overflow-x:auto;padding:10px 24px 28px;scroll-snap-type:x mandatory}
-  .shots .row::-webkit-scrollbar{height:10px}
-  .shots .row::-webkit-scrollbar-thumb{background:var(--ink);border-radius:6px}
-  .shot{flex:0 0 auto;width:min(560px,82vw);scroll-snap-align:center}
+  .shots .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:22px;padding:10px 24px 28px;max-width:1100px;margin:0 auto}
   .shot img{width:100%;display:block;border-radius:16px;border:var(--stroke) solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
 
   /* section heading */
@@ -102,10 +99,9 @@
   <section class="shots">
     <div class="row">
       <div class="shot"><img src="screenshots/0_hero.png" alt="Record your Mac's audio"></div>
+      <div class="shot"><img src="screenshots/3_recording.png" alt="Watch it record, live"></div>
       <div class="shot"><img src="screenshots/1_desktop.png" alt="Saved straight to your Desktop"></div>
       <div class="shot"><img src="screenshots/2_quality.png" alt="Good, Better, or lossless Best"></div>
-      <div class="shot"><img src="screenshots/3_recording.png" alt="Watch it record, live"></div>
-      <div class="shot"><img src="screenshots/4_privacy.png" alt="No mic, no screen, just sound"></div>
     </div>
   </section>
 
